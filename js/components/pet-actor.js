@@ -49,6 +49,7 @@
       return {
         blink: false,
         frameW: '',
+        imgFallback: false,
         ro: null,
         shake: false,
         loaded: false,
@@ -77,9 +78,14 @@
         return (this.frame[0] / this.frame[1]).toFixed(4);
       },
       src() {
-        if (this.usingEvolved) return this.$assets.pet(this.pet.id, 'evolved');
-        const map = this.pet.stateMap || {};
-        return this.$assets.pet(this.pet.id, map[this.state] || 'idle');
+        let url;
+        if (this.usingEvolved) url = this.$assets.pet(this.pet.id, 'evolved');
+        else {
+          const map = this.pet.stateMap || {};
+          url = this.$assets.pet(this.pet.id, map[this.state] || 'idle');
+        }
+        if (this.imgFallback && url.indexOf('.webp') > 0) return url.replace(/\.webp$/, '.png');
+        return url;
       },
       blinkSrc() {
         return this.pet.states && this.pet.states.blink ? this.$assets.pet(this.pet.id, 'blink') : '';
@@ -94,13 +100,12 @@
       },
       state() {
         if (this.state !== 'idle') this.blink = false;
+        this.$nextTick(this.fitFrame);
       },
       'pet.id'() {
         this.loaded = false;
         this.error = false;
-        this.$nextTick(this.fitFrame);
-      },
-      state() {
+        this.imgFallback = false;
         this.$nextTick(this.fitFrame);
       },
     },
@@ -137,6 +142,10 @@
         this.error = false;
       },
       onError() {
+        if (!this.imgFallback && this.src && this.src.indexOf('.webp') > 0) {
+          this.imgFallback = true;
+          return;
+        }
         this.error = true;
       },
       scheduleBlink() {

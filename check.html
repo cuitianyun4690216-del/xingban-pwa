@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>星伴学园 · 设备自检</title>
+<style>
+  html,body{margin:0;padding:0;background:#FFF8E8;color:#2B2233;font:15px/1.65 "Microsoft YaHei",sans-serif;}
+  .wrap{padding:20px 16px 40px;}
+  h1{font-size:20px;margin:0 0 4px;}
+  .sub{color:#8A6D3B;font-size:12px;margin:0 0 14px;}
+  .row{background:#fff;border:1px solid #E2CFA6;border-radius:10px;padding:9px 11px;margin-bottom:7px;font-size:12.5px;word-break:break-all;}
+  .row b{color:#7A5A22;}
+  .ok{color:#2F7A46;font-weight:bold;}
+  .bad{color:#B4574D;font-weight:bold;}
+  .petbox{width:220px;height:270px;margin:12px auto;border:1px dashed #C9A96A;border-radius:12px;background:#F6EBD7;position:relative;overflow:hidden;}
+  .petimg{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;}
+  a.btn{display:block;text-align:center;background:#F3DFAF;border:1px solid #C9A96A;border-radius:10px;padding:13px;margin-top:16px;color:#2B2233;text-decoration:none;font-size:16px;font-weight:bold;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>星伴学园 · 设备自检</h1>
+  <p class="sub">把整页截图发给开发者即可定位问题</p>
+
+  <div class="row"><b>系统：</b><span id="ua">-</span></div>
+  <div class="row"><b>WebP 支持：</b><span id="webp">检测中…</span></div>
+  <div class="row"><b>宠物图片：</b><span id="img1">检测中…</span></div>
+  <div class="row"><b>宠物区域尺寸：</b><span id="box">检测中…</span></div>
+  <div class="row"><b>本地存储：</b><span id="ls">检测中…</span></div>
+  <div class="row"><b>离线缓存：</b><span id="sw">检测中…</span></div>
+
+  <div class="petbox" id="petbox">
+    <img class="petimg" id="petimg" src="assets/pets/capybara/idle.webp" alt="测试宠物" />
+  </div>
+
+  <a class="btn" href="./index.html">返回游戏</a>
+</div>
+
+<script>
+(function () {
+  function set(id, text, cls) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = text;
+    if (cls) el.className = cls;
+  }
+  var ua = navigator.userAgent;
+  set('ua', ua);
+
+  var m = ua.match(/OS (\d+)[._](\d+)/);
+  var ios = m ? ('iOS ' + m[1] + '.' + m[2]) : '';
+
+  var webpOk = false;
+  try {
+    var c = document.createElement('canvas');
+    webpOk = c.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+  } catch (e) {}
+  set('webp', (webpOk ? '支持' : '不支持（这就是宠物不显示的原因）') + (ios ? ' · ' + ios : ''), webpOk ? 'ok' : 'bad');
+
+  var img = document.getElementById('petimg');
+  function onLoad() {
+    set('img1', '加载成功 ' + img.naturalWidth + '×' + img.naturalHeight, 'ok');
+    var r = img.getBoundingClientRect();
+    var box = document.getElementById('petbox').getBoundingClientRect();
+    set('box', '容器 ' + Math.round(box.width) + '×' + Math.round(box.height) +
+      '，图片 ' + Math.round(r.width) + '×' + Math.round(r.height), r.width > 10 ? 'ok' : 'bad');
+  }
+  img.addEventListener('load', onLoad);
+  img.addEventListener('error', function () {
+    set('img1', '加载失败（图片格式或路径问题）', 'bad');
+  });
+  if (img.complete && img.naturalWidth) setTimeout(onLoad, 100);
+
+  try {
+    localStorage.setItem('__t', '1');
+    set('ls', localStorage.getItem('__t') === '1' ? '正常' : '异常', 'ok');
+    localStorage.removeItem('__t');
+  } catch (e) {
+    set('ls', '不可用：' + e.message, 'bad');
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistration().then(function (r) {
+      set('sw', r ? (r.active ? '已启用' : '安装中') : '未启用（首次访问正常）', r && r.active ? 'ok' : '');
+    }).catch(function () { set('sw', '不可用'); });
+  } else {
+    set('sw', '浏览器不支持', 'bad');
+  }
+})();
+</script>
+</body>
+</html>
