@@ -315,3 +315,28 @@
   font-size: 9.5px;
   color: var(--ink-3);
 }
+
+/* 套装收集 --------------------------------------------------------------- */
+.wd-sets { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+
+.wd-set {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px; border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255, 253, 247, 0.95), rgba(246, 235, 216, 0.9));
+  border: 1px solid rgba(201, 169, 106, 0.4);
+}
+
+.wd-set.is-done { border-color: rgba(201, 169, 106, 0.8); background: linear-gradient(180deg, #fff8e6, #f3e0b8); }
+
+.wd-set b { font-size: 11px; color: var(--ink-1); }
+
+.wd-set span { font-family: var(--font-num); font-size: 10px; color: var(--gold-3); }
+
+.wd-set em { font-style: normal; font-size: 9.5px; color: var(--sage-3); }
+
+.wd-set__bar {
+  flex: 1; height: 5px; border-radius: 999px;
+  background: rgba(174, 151, 238, 0.16); overflow: hidden;
+}
+
+.wd-set__bar i { display: block; height: 100%; background: linear-gradient(90deg, #cbb98a, #e8cf94); }
