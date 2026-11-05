@@ -369,6 +369,19 @@
     whoosh: (t) => noise(t, 0.3, 0.04, 900),
   };
 
+  function petVoice(petId, mood) {
+    if (!S.sfx || !A.ready) return;
+    const t = now();
+    const base = petId === 'hamster' ? 560 : 300;
+    const up = mood === 'hungry' ? 0.82 : mood === 'sleep' ? 0.72 : mood === 'happy' ? 1.22 : 1;
+    try {
+      tone('sine', base * up, 0.16, 0.05, t, base * up * 1.22);
+      setTimeout(function () {
+        if (A.ready) tone('sine', base * up * 1.28, 0.14, 0.04, now(), base * up * 1.05);
+      }, 150);
+    } catch (e) {}
+  }
+
   function sfx(name) {
     if (!S.sfx || !A.ready) return;
     const fn = SFX[name] || SFX.click;
@@ -477,6 +490,7 @@
     resume: resume,
     scene: setScene,
     sfx: sfx,
+    voice: petVoice,
     duck: duck,
     pause: pause,
     resumeAll: resumeAll,

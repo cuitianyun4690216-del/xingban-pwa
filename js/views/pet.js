@@ -77,6 +77,12 @@
       equipped() {
         return XB.helpers.equippedItems(this.petId);
       },
+      care() {
+        return XB.helpers.careInfo();
+      },
+      wish() {
+        return XB.helpers.wishInfo();
+      },
       isEvolved() {
         return XB.helpers.petForm(this.petId) === 'evolved';
       },
@@ -110,6 +116,9 @@
           XB.actions.toast(res.action.line, 'heart');
           XB.actions.presentResult(res);
         }
+      },
+      openCare() {
+        XB.ui.careSheet = true;
       },
       openWardrobe() {
         XB.ui.wardrobe = true;
@@ -227,6 +236,29 @@
             <span class="care__label">{{ a.label }}</span>
           </button>
         </div>
+
+        <section class="pet-care">
+          <div class="pet-care__head">
+            <b>今天的照顾</b>
+            <button class="btn btn--sm btn--gold" @click="openCare">喂它</button>
+          </div>
+          <div class="care-bar">
+            <span class="care-bar__label"><XingIcon name="leaf" :size="12" />饱食</span>
+            <span class="care-bar__track"><i :style="{ width: care.hunger + '%' }" :class="{ 'is-low': care.hunger < 35 }"></i></span>
+            <b>{{ care.hunger }}</b>
+          </div>
+          <div class="care-bar">
+            <span class="care-bar__label"><XingIcon name="heart" :size="12" />心情</span>
+            <span class="care-bar__track care-bar__track--mood"><i :style="{ width: care.mood + '%' }"></i></span>
+            <b>{{ care.mood }}</b>
+          </div>
+          <div class="care-bar">
+            <span class="care-bar__label"><XingIcon name="moon" :size="12" />精力</span>
+            <span class="care-bar__track"><i :style="{ width: care.energy + '%' }"></i></span>
+            <b>{{ care.energy }}</b>
+          </div>
+          <p class="pet-care__wish">{{ wish.done ? '今天的心愿已经满足啦' : '今天想吃：' + wish.food.name }}</p>
+        </section>
 
         <section class="panel dress">
           <i class="panel__corner panel__corner--tl"><Orn type="corner" :size="18" /></i>

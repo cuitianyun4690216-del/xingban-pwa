@@ -240,7 +240,10 @@
           this.action = '';
         }, 560);
         this.spawnSparks(this.pet.id === 'hamster' ? 'star' : 'heart', this.pet.id === 'hamster' ? 7 : 5);
-        if (window.XBAudio) XBAudio.sfx(this.pet.id === 'hamster' ? 'petHam' : 'petCapy');
+        if (window.XBAudio) {
+          XBAudio.sfx(this.pet.id === 'hamster' ? 'petHam' : 'petCapy');
+          if (XBAudio.voice && Math.random() < 0.35) XBAudio.voice(this.pet.id, this.state === 'happy' ? 'happy' : 'idle');
+        }
         this.$emit('tap');
       },
     },

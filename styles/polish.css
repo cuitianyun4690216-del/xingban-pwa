@@ -716,3 +716,153 @@
   font-size: 9.5px;
   color: var(--ink-4);
 }
+
+/* 奇遇弹层 --------------------------------------------------------------- */
+.enc-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 8500;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(18, 12, 26, 0.68);
+  backdrop-filter: blur(3px);
+}
+
+.enc-card {
+  width: 100%;
+  max-width: 330px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #fffdf8, #f6ead4);
+  border: 1px solid rgba(201, 169, 106, 0.65);
+  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.85);
+  animation: encIn 0.32s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+@keyframes encIn {
+  from { transform: translateY(16px) scale(0.97); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.enc-card__art {
+  position: relative;
+  height: 86px;
+  background: radial-gradient(120% 90% at 50% 120%, rgba(240, 215, 160, 0.55), transparent 70%),
+    linear-gradient(180deg, #2a2038, #4a3a56);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.enc-card__star {
+  color: #f3dfaf;
+  filter: drop-shadow(0 0 12px rgba(243, 223, 175, 0.8));
+  animation: encStar 3.6s ease-in-out infinite;
+}
+
+@keyframes encStar {
+  0%, 100% { transform: scale(1) rotate(0); opacity: 0.9; }
+  50% { transform: scale(1.12) rotate(8deg); opacity: 1; }
+}
+
+.enc-card__glow {
+  position: absolute;
+  inset: -40% -10%;
+  background: radial-gradient(circle at 50% 60%, rgba(243, 223, 175, 0.35), transparent 60%);
+}
+
+.enc-card__body {
+  padding: 14px 16px 16px;
+}
+
+.enc-card__kicker {
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  color: var(--gold-3);
+  margin-bottom: 3px;
+}
+
+.enc-card__title {
+  font-family: var(--font-title);
+  font-size: 17px;
+  letter-spacing: 0.08em;
+  margin-bottom: 7px;
+}
+
+.enc-card__text {
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  margin-bottom: 12px;
+}
+
+.enc-card__options {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.enc-opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 11px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--ink-1);
+  background: rgba(255, 253, 247, 0.92);
+  border: 1px solid rgba(201, 169, 106, 0.4);
+}
+
+.enc-opt:active {
+  transform: scale(0.98);
+}
+
+.enc-opt__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold-3);
+  flex-shrink: 0;
+}
+
+.enc-card__result p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255, 252, 240, 0.85);
+  border: 1px dashed rgba(201, 169, 106, 0.5);
+}
+
+/* 宠物页照料条 ----------------------------------------------------------- */
+.pet-care {
+  margin: 10px 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 253, 247, 0.96), rgba(246, 235, 216, 0.92));
+  border: 1px solid rgba(201, 169, 106, 0.45);
+}
+
+.pet-care__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.pet-care__head b {
+  font-family: var(--font-title);
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+  color: var(--gold-3);
+}
+
+.pet-care .care-bar {
+  grid-template-columns: 46px 1fr 26px;
+}

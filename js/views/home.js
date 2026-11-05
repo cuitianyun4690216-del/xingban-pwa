@@ -95,6 +95,11 @@
       this.speechTimer = setInterval(() => {
         this.speechIndex++;
       }, 14000);
+      setTimeout(function () {
+        if (XB.state.flags && XB.state.flags.onboarded && !XB.ui.onboarding && XB.actions.maybeEncounter) {
+          XB.actions.maybeEncounter();
+        }
+      }, 2600);
     },
     beforeUnmount() {
       clearInterval(this.speechTimer);
