@@ -24,6 +24,18 @@
       slots() {
         return WR.slots;
       },
+      sets() {
+        const claimed = XB.state.inventory.setClaimed || [];
+        const defs = [
+          { id: 'set-academy', name: '星语学院', items: ['hat-wizard', 'glasses-round', 'bag-school', 'pin-star'], coins: 120, stars: 6 },
+          { id: 'set-winter', name: '冬日暖意', items: ['hat-winter', 'scarf-snow', 'collar-bell'], coins: 90, stars: 5 },
+          { id: 'set-spring', name: '春日花园', items: ['hat-flower', 'bow-lav', 'scarf-star'], coins: 90, stars: 5 },
+        ];
+        return defs.map((d) => {
+          const owned = d.items.filter((id) => this.owns(id)).length;
+          return Object.assign({}, d, { owned: owned, done: owned >= d.items.length, claimed: claimed.indexOf(d.id) >= 0 });
+        });
+      },
       petConf() {
         return window.XingPets.byId(this.petId);
       },
@@ -53,6 +65,18 @@
       },
     },
     methods: {
+      claimSet(s) {
+        if (!s.done) return;
+        const inv = XB.state.inventory;
+        inv.setClaimed = inv.setClaimed || [];
+        if (inv.setClaimed.indexOf(s.id) >= 0) return;
+        inv.setClaimed.push(s.id);
+        XB.state.player.coins += s.coins;
+        XB.state.player.stars += s.stars;
+        XB.actions.toast('集齐「' + s.name + '」，奖励已发放', 'star');
+        if (window.XBAudio) XBAudio.sfx('unlock');
+        if (window.XBFX) XBFX.coinFly(5);
+      },
       close() {
         XB.ui.wardrobe = false;
       },
@@ -127,6 +151,16 @@
                   </li>
                   <li v-if="!equipped.length" class="wd-empty">还没有穿戴，挑一件试试</li>
                 </ul>
+              </div>
+            </div>
+
+                        <div class="wd-sets">
+              <div v-for="s in sets" :key="s.id" class="wd-set" :class="{ 'is-done': s.done }">
+                <b>{{ s.name }}</b>
+                <span>{{ s.owned }}/{{ s.items.length }}</span>
+                <button v-if="s.done && !s.claimed" class="btn btn--sm btn--gold" @click="claimSet(s)">领奖励</button>
+                <em v-else-if="s.claimed">已领取</em>
+                <i v-else class="wd-set__bar"><i :style="{ width: Math.round(s.owned / s.items.length * 100) + '%' }"></i></i>
               </div>
             </div>
 
