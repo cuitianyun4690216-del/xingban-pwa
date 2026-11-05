@@ -17,7 +17,10 @@
     },
     methods: {
       styleOf(it) {
-        const a = (it.anchors && it.anchors[this.petId]) || { x: 50, y: 20, w: 26, r: 0 };
+        const rev = (window.XB && XB.ui && XB.ui.anchorRev) || 0;
+        let a = (it.anchors && it.anchors[this.petId]) || { x: 50, y: 20, w: 26, r: 0 };
+        const ov = window.XBAnchors && XBAnchors.get(it.id, this.petId);
+        if (ov) a = Object.assign({}, a, ov);
         return {
           left: a.x + '%',
           top: a.y + '%',
