@@ -340,3 +340,24 @@
 }
 
 .wd-set__bar i { display: block; height: 100%; background: linear-gradient(90deg, #cbb98a, #e8cf94); }
+
+/* 装扮微调 --------------------------------------------------------------- */
+.wd-adj-layer {
+  position: absolute; inset: 0; z-index: 6;
+  cursor: grab; touch-action: none;
+  border: 1px dashed rgba(201, 169, 106, 0.55);
+  border-radius: 12px;
+  background: rgba(255, 240, 200, 0.05);
+}
+
+.wd-adj-tools {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-top: 6px;
+}
+
+.wd-adj-tools button {
+  height: 26px; border-radius: 7px; font-size: 10px; color: var(--ink-2);
+  border: 1px solid rgba(201, 169, 106, 0.4);
+  background: rgba(255, 252, 245, 0.9);
+}
+
+.wd-adj-tools button:active { transform: scale(0.95); }
