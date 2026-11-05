@@ -29,6 +29,7 @@
           XB.actions.toast(res.reason, 'info');
           return;
         }
+        if (window.XBAudio && XBAudio.say) XBAudio.say(XB.state.activePetId, 'eat');
         this.close();
         XB.actions.toast(res.wishDone ? '心愿达成！它开心地转了个圈' : res.liked ? '吃得特别香～' : '吃得很满足', 'gift');
         if (window.XBFX) XBFX.coinFly(res.wishDone ? 4 : 2);

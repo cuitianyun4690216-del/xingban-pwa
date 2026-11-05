@@ -369,6 +369,27 @@
     whoosh: (t) => noise(t, 0.3, 0.04, 900),
   };
 
+  let curVoice = null;
+  function say(petId, key) {
+    const map = window.XB_VOICE && window.XB_VOICE[petId];
+    if (!map || !map[key]) return false;
+    const st = window.XB && XB.state && XB.state.settings;
+    if (st && st.voice === false) return false;
+    try {
+      if (curVoice) {
+        curVoice.pause();
+        curVoice.currentTime = 0;
+      }
+      const a = new Audio(map[key]);
+      a.volume = Math.min(1, (S.sfxVol || 0.75) * 0.9);
+      a.play().catch(function () {});
+      curVoice = a;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   function petVoice(petId, mood) {
     if (!S.sfx || !A.ready) return;
     const t = now();
@@ -455,6 +476,7 @@
       if (st.sfx == null) st.sfx = true;
       if (st.sfxVol == null) st.sfxVol = 0.75;
       if (st.duckTimer == null) st.duckTimer = true;
+      if (st.voice == null) st.voice = true;
       S.bgm = st.bgm;
       S.bgmVol = st.bgmVol;
       S.sfx = st.sfx;
@@ -491,6 +513,7 @@
     scene: setScene,
     sfx: sfx,
     voice: petVoice,
+    say: say,
     duck: duck,
     pause: pause,
     resumeAll: resumeAll,

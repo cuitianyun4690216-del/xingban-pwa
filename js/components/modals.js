@@ -327,7 +327,9 @@
         s[key] = !s[key];
         if (window.XBAudio) XBAudio.apply(s);
         if (key === 'sfx' && s.sfx && window.XBAudio) XBAudio.sfx('click');
-        XB.actions.toast(key === 'bgm' ? (s.bgm ? '背景音乐已开启' : '背景音乐已关闭') : s.sfx ? '音效已开启' : '音效已关闭', 'bell');
+        if (key === 'voice' && s.voice && window.XBAudio) XBAudio.say(XB.state.activePetId, 'greeting');
+        const msg = key === 'bgm' ? (s.bgm ? '背景音乐已开启' : '背景音乐已关闭') : key === 'voice' ? (s.voice ? '宠物语音已开启' : '宠物语音已关闭') : s.sfx ? '音效已开启' : '音效已关闭';
+        XB.actions.toast(msg, 'bell');
       },
       setVolume(key, event) {
         const v = Math.max(0, Math.min(1, Number(event.target.value) / 100));
@@ -398,6 +400,12 @@
 
             <div class="set-group">
               <p class="set-group__title">音效</p>
+              <div class="set-row">
+                <span class="set-row__label"><XingIcon name="paw" :size="15" />宠物语音</span>
+                <button class="switch" :class="{ 'is-on': settings.voice !== false }" @click="toggleAudio('voice')" :aria-pressed="settings.voice !== false">
+                  <span class="switch__dot"></span>
+                </button>
+              </div>
               <div class="set-row">
                 <span class="set-row__label"><XingIcon name="bell" :size="15" />操作音效</span>
                 <button class="switch" :class="{ 'is-on': settings.sfx }" @click="toggleAudio('sfx')" :aria-pressed="settings.sfx">

@@ -1,5 +1,5 @@
-/* 星伴学园 Service Worker 329eef41fd */
-const CACHE = 'xingban-329eef41fd';
+/* 星伴学园 Service Worker 050102b95f */
+const CACHE = 'xingban-050102b95f';
 const CORE = [
   "./",
   "./assets/avatars/player.webp",
@@ -38,6 +38,26 @@ const CORE = [
   "./assets/scenes/forest.webp",
   "./assets/scenes/observatory.webp",
   "./assets/scenes/study.webp",
+  "./assets/voice/capybara-bye.mp3",
+  "./assets/voice/capybara-eat.mp3",
+  "./assets/voice/capybara-greeting.mp3",
+  "./assets/voice/capybara-happy.mp3",
+  "./assets/voice/capybara-hungry.mp3",
+  "./assets/voice/capybara-levelup.mp3",
+  "./assets/voice/capybara-pet.mp3",
+  "./assets/voice/capybara-proud.mp3",
+  "./assets/voice/capybara-sleep.mp3",
+  "./assets/voice/capybara-wish.mp3",
+  "./assets/voice/hamster-bye.mp3",
+  "./assets/voice/hamster-eat.mp3",
+  "./assets/voice/hamster-greeting.mp3",
+  "./assets/voice/hamster-happy.mp3",
+  "./assets/voice/hamster-hungry.mp3",
+  "./assets/voice/hamster-levelup.mp3",
+  "./assets/voice/hamster-pet.mp3",
+  "./assets/voice/hamster-proud.mp3",
+  "./assets/voice/hamster-sleep.mp3",
+  "./assets/voice/hamster-wish.mp3",
   "./check.html",
   "./index.html",
   "./js/app.js",
@@ -60,6 +80,7 @@ const CORE = [
   "./js/components/ui.js",
   "./js/components/wardrobe.js",
   "./js/data/catalog.js",
+  "./js/data/voice.js",
   "./js/data/wardrobe.js",
   "./js/data/world.js",
   "./js/fx.js",

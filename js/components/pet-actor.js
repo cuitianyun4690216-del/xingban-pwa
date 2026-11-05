@@ -243,6 +243,7 @@
         if (window.XBAudio) {
           XBAudio.sfx(this.pet.id === 'hamster' ? 'petHam' : 'petCapy');
           if (XBAudio.voice && Math.random() < 0.35) XBAudio.voice(this.pet.id, this.state === 'happy' ? 'happy' : 'idle');
+          if (XBAudio.say && Math.random() < 0.4) XBAudio.say(this.pet.id, Math.random() < 0.5 ? 'pet' : 'happy');
         }
         this.$emit('tap');
       },

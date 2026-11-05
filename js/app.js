@@ -151,7 +151,10 @@
         }
       },
       'levels.length'(n, old) {
-        if (n > (old || 0) && window.XBAudio) XBAudio.sfx('levelup');
+        if (n > (old || 0) && window.XBAudio) {
+          XBAudio.sfx('levelup');
+          if (XBAudio.say) XBAudio.say(XB.state.activePetId, 'levelup');
+        }
       },
       timerRunning(v) {
         if (window.XBAudio) XBAudio.duck(!!v);

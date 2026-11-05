@@ -100,6 +100,16 @@
           XB.actions.maybeEncounter();
         }
       }, 2600);
+      setTimeout(function () {
+        if (!XB.state.flags || !XB.state.flags.onboarded || XB.ui.onboarding) return;
+        const petId = XB.state.activePetId;
+        if (!sessionStorage.getItem('xb-greet-' + petId)) {
+          sessionStorage.setItem('xb-greet-' + petId, '1');
+          if (window.XBAudio && XBAudio.say) XBAudio.say(petId, 'greeting');
+        } else if (XB.helpers.careInfo().hunger < 30 && window.XBAudio && XBAudio.say) {
+          XBAudio.say(petId, 'hungry');
+        }
+      }, 1500);
     },
     beforeUnmount() {
       clearInterval(this.speechTimer);
