@@ -21,6 +21,9 @@
       return { slot: 'hat', petId: XB.state.activePetId };
     },
     computed: {
+      adjustItem() {
+        return this.equipped.find((i) => i.slot === this.slot) || this.equipped[0] || null;
+      },
       slots() {
         return WR.slots;
       },
@@ -65,6 +68,62 @@
       },
     },
     methods: {
+      toggleAdjust() {
+        this.adjust = !this.adjust;
+      },
+      anchorFor(it) {
+        if (!it) return null;
+        const base = (it.anchors && it.anchors[this.petId]) || { x: 50, y: 20, w: 26, r: 0 };
+        const ov = window.XBAnchors && XBAnchors.get(it.id, this.petId);
+        return Object.assign({}, base, ov || {});
+      },
+      saveAnchor(a) {
+        if (!this.adjustItem) return;
+        if (window.XBAnchors) XBAnchors.set(this.adjustItem.id, this.petId, a);
+      },
+      nudge(dx, dy) {
+        const a = this.anchorFor(this.adjustItem);
+        if (!a) return;
+        a.x = Math.round((a.x + dx) * 10) / 10;
+        a.y = Math.round((a.y + dy) * 10) / 10;
+        this.saveAnchor(a);
+      },
+      scale(k) {
+        const a = this.anchorFor(this.adjustItem);
+        if (!a) return;
+        a.w = Math.max(6, Math.min(90, Math.round((a.w + k) * 10) / 10));
+        this.saveAnchor(a);
+      },
+      rotate(d) {
+        const a = this.anchorFor(this.adjustItem);
+        if (!a) return;
+        a.r = Math.round(a.r + d);
+        this.saveAnchor(a);
+      },
+      resetAnchor() {
+        if (this.adjustItem && window.XBAnchors) XBAnchors.clear(this.adjustItem.id, this.petId);
+      },
+      startDrag(e) {
+        if (!this.adjustItem) return;
+        this.drag = { x: e.clientX, y: e.clientY };
+        e.preventDefault();
+      },
+      onDrag(e) {
+        if (!this.drag || !this.adjustItem) return;
+        const el = this.$refs.stage;
+        const w = el ? el.clientWidth : 200;
+        const h = el ? el.clientHeight : 200;
+        const dx = ((e.clientX - this.drag.x) / w) * 100;
+        const dy = ((e.clientY - this.drag.y) / h) * 100;
+        this.drag = { x: e.clientX, y: e.clientY };
+        const a = this.anchorFor(this.adjustItem);
+        a.x = Math.round((a.x + dx) * 10) / 10;
+        a.y = Math.round((a.y + dy) * 10) / 10;
+        this.saveAnchor(a);
+      },
+      endDrag() {
+        this.drag = null;
+      },
       claimSet(s) {
         if (!s.done) return;
         const inv = XB.state.inventory;
@@ -138,12 +197,22 @@
 
           <div class="modal__body">
             <div class="wd-preview">
-              <div class="wd-preview__stage">
+              <div class="wd-preview__stage" ref="stage">
                 <XingPetActor :key="petId" :pet="petConf" state="idle" :burst="0" :evolved="evolved" :costumes="equipped" />
+                <div v-if="adjustItem" class="wd-adj-layer"
+                     @pointerdown="startDrag" @pointermove="onDrag" @pointerup="endDrag" @pointercancel="endDrag"></div>
               </div>
               <div class="wd-preview__side">
                 <p class="wd-preview__name">{{ petMeta.name }} · Lv.{{ petMeta.level }}</p>
                 <p class="wd-preview__sub">已装备 {{ equipped.length }} 件</p>
+                <p class="wd-preview__tip">拖动宠物身上的装扮可调整位置</p>
+                <div v-if="adjustItem" class="wd-adj-tools">
+                  <button @click="nudge(-1, 0)">←</button><button @click="nudge(1, 0)">→</button>
+                  <button @click="nudge(0, -1)">↑</button><button @click="nudge(0, 1)">↓</button>
+                  <button @click="scale(-2)">小</button><button @click="scale(2)">大</button>
+                  <button @click="rotate(-4)">↺</button><button @click="rotate(4)">↻</button>
+                  <button @click="resetAnchor">重置</button>
+                </div>
                 <ul class="wd-preview__list">
                   <li v-for="it in equipped" :key="it.id">
                     <span>{{ it.name }}</span>
