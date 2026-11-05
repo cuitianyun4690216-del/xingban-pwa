@@ -115,6 +115,7 @@
           this.setState('pet');
           XB.actions.toast(res.action.line, 'heart');
           XB.actions.presentResult(res);
+          if (window.XBAudio && XBAudio.sayRandom) XBAudio.sayRandom(this.petId, 'pat');
         }
       },
       forms() {
@@ -165,6 +166,9 @@
         this.setState(action.state);
         XB.actions.toast(res.action.line, res.action.icon);
         XB.actions.presentResult(res);
+        if (window.XBAudio && XBAudio.sayRandom) {
+          XBAudio.sayRandom(this.petId, action.id === 'feed' ? 'feed' : action.id === 'play' ? 'play' : 'pat');
+        }
       },
       setState(state) {
         clearTimeout(this.timer);

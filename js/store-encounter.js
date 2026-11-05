@@ -118,6 +118,7 @@
       title: ev.title,
       text: ev.text.replace(/\{pet\}/g, petName()),
       options: ev.options,
+      img: 'assets/encounters/' + ev.id + '.webp',
       result: '',
     };
     return ev;

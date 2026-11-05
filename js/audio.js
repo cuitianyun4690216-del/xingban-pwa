@@ -390,6 +390,11 @@
     }
   }
 
+  function sayRandom(petId, kind) {
+    const n = Math.floor(Math.random() * 10);
+    return say(petId, kind + '-' + n);
+  }
+
   function petVoice(petId, mood) {
     if (!S.sfx || !A.ready) return;
     const t = now();
@@ -514,6 +519,7 @@
     sfx: sfx,
     voice: petVoice,
     say: say,
+    sayRandom: sayRandom,
     duck: duck,
     pause: pause,
     resumeAll: resumeAll,

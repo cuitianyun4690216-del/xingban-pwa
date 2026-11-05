@@ -25,7 +25,8 @@
     template: `
       <div class="enc-mask" @click.self="close">
         <div class="enc-card" role="dialog" aria-label="小奇遇">
-          <div class="enc-card__art">
+          <div class="enc-card__art" :class="{ 'has-img': !!data.img }">
+            <img v-if="data.img" class="enc-card__img" :src="data.img" alt="" />
             <span class="enc-card__star"><Orn type="star4" :size="26" /></span>
             <span class="enc-card__glow"></span>
           </div>

@@ -243,7 +243,13 @@
         if (window.XBAudio) {
           XBAudio.sfx(this.pet.id === 'hamster' ? 'petHam' : 'petCapy');
           if (XBAudio.voice && Math.random() < 0.35) XBAudio.voice(this.pet.id, this.state === 'happy' ? 'happy' : 'idle');
-          if (XBAudio.say && Math.random() < 0.4) XBAudio.say(this.pet.id, Math.random() < 0.5 ? 'pet' : 'happy');
+          if (XBAudio.say) {
+            const care = XB.helpers.careInfo ? XB.helpers.careInfo() : null;
+            if (care && care.hunger < 30) XBAudio.say(this.pet.id, 'hungry');
+            else if (care && care.energy < 25) XBAudio.say(this.pet.id, 'sleep');
+            else if (this.state === 'happy') XBAudio.say(this.pet.id, 'happy');
+            else if (Math.random() < 0.55 && XBAudio.sayRandom) XBAudio.sayRandom(this.pet.id, 'pat');
+          }
         }
         this.$emit('tap');
       },
