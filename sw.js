@@ -1,5 +1,5 @@
-/* 星伴学园 Service Worker 72060cae1e */
-const CACHE = 'xingban-72060cae1e';
+/* 星伴学园 Service Worker 7f768c32c6 */
+const CACHE = 'xingban-7f768c32c6';
 const CORE = [
   "./",
   "./assets/avatars/player.webp",
