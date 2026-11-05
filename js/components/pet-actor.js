@@ -48,6 +48,8 @@
     data() {
       return {
         blink: false,
+        frameW: '',
+        ro: null,
         shake: false,
         loaded: false,
         error: false,
@@ -96,12 +98,22 @@
       'pet.id'() {
         this.loaded = false;
         this.error = false;
+        this.$nextTick(this.fitFrame);
+      },
+      state() {
+        this.$nextTick(this.fitFrame);
       },
     },
     mounted() {
       this.scheduleBlink();
       this.scheduleShake();
       this.scheduleIdle();
+      this.$nextTick(this.fitFrame);
+      window.addEventListener('resize', this.fitFrame);
+      if (typeof ResizeObserver !== 'undefined' && this.$refs.stage) {
+        this.ro = new ResizeObserver(this.fitFrame);
+        this.ro.observe(this.$refs.stage);
+      }
     },
     beforeUnmount() {
       clearTimeout(this.blinkTimer);
@@ -109,8 +121,17 @@
       clearTimeout(this.shakeTimer);
       clearTimeout(this.actionTimer);
       clearTimeout(this.hopTimer);
+      window.removeEventListener('resize', this.fitFrame);
+      if (this.ro) this.ro.disconnect();
     },
     methods: {
+      fitFrame() {
+        const box = this.$refs.stage;
+        if (!box) return;
+        const h = box.clientHeight || box.offsetHeight || 0;
+        const ar = this.frame[0] / this.frame[1];
+        if (h > 0 && ar > 0) this.frameW = Math.round(h * ar) + 'px';
+      },
       onLoad() {
         this.loaded = true;
         this.error = false;
@@ -218,8 +239,8 @@
       <div class="pet-actor" :class="[stateClass, { 'is-shake': shake, ['is-' + action]: !!action }]" role="button" tabindex="0"
            :aria-label="'和' + pet.name + '互动'" @click="onTap" @keydown.enter.prevent="onTap">
         <div class="pet-actor__float">
-          <div class="pet-actor__body">
-            <div class="pet-actor__frame" :style="{ '--ar': ratio }">
+          <div class="pet-actor__body" ref="stage">
+            <div class="pet-actor__frame" :style="{ '--ar': ratio, width: frameW || undefined }">
               <XBCostumeLayer :items="costumes" :pet-id="pet.id" layer="back" />
               <transition name="pet-state">
                 <img :key="src" :src="src" class="pet-actor__img" :alt="pet.name" draggable="false"

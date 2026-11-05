@@ -25,6 +25,7 @@
   if (XB.ui.parentGate == null) XB.ui.parentGate = false;
   if (XB.ui.redeem == null) XB.ui.redeem = false;
   if (XB.ui.parentAuthed == null) XB.ui.parentAuthed = false;
+  if (XB.ui.onboarding == null) XB.ui.onboarding = false;
 
   /* ---------------- 密码（WebCrypto PBKDF2，失败回退迭代哈希） ---------------- */
   const enc = new TextEncoder();

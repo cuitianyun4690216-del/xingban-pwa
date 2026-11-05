@@ -122,6 +122,9 @@
       timerRunning() {
         return !!(XB.state.timer && XB.state.timer.running);
       },
+      onboarding() {
+        return XB.ui.onboarding;
+      },
     },
     watch: {
       mode(v) {
@@ -155,6 +158,11 @@
         this.applyScene();
       }
       if (window.XBFX) XBFX.init();
+      if (!XB.state.flags || !XB.state.flags.onboarded) {
+        setTimeout(function () {
+          XB.ui.onboarding = true;
+        }, 900);
+      }
       document.body.classList.toggle('parent-mode', this.mode === 'parent');
       this.buildDust();
       const boot = XB.bootResult();
@@ -283,6 +291,7 @@
         <XBSettings v-if="settingsOpen" />
         <XBConfirm v-if="confirm" />
         <XBHistory v-if="historyOpen" />
+        <XBOnboarding v-if="onboarding" @done="onboarding = false" />
       </div>
     `,
   };
@@ -312,6 +321,7 @@
     ['XBHistory', window.XBHistory],
     ['XBWardrobe', window.XBWardrobe],
     ['XBParentGate', window.XBParentGate],
+    ['XBOnboarding', window.XBOnboarding],
     ['XBRedeem', window.XBRedeem],
     ['XBCostumeThumb', window.XBCostumeThumb],
     ['XBCostumeLayer', window.XBCostumeLayer],

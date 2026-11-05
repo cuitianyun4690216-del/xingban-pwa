@@ -348,6 +348,11 @@
         navigator.clipboard && navigator.clipboard.writeText(text);
         XB.actions.toast('存档已复制到剪贴板', 'bookmark');
       },
+      replayOnboarding() {
+        XB.ui.settings = false;
+        XB.state.flags.onboarded = false;
+        XB.ui.onboarding = true;
+      },
       enterParent() {
         XB.ui.settings = false;
         XB.ui.parentGate = true;
@@ -416,6 +421,11 @@
             <div class="set-row">
               <span class="set-row__label"><XingIcon name="bookmark" :size="15" />本地存档</span>
               <button class="btn btn--sm" @click="exportData">复制存档</button>
+            </div>
+
+            <div class="set-row">
+              <span class="set-row__label"><XingIcon name="sparkle" :size="15" />新手引导</span>
+              <button class="btn btn--sm" @click="replayOnboarding">重新观看</button>
             </div>
 
             <div class="set-row">

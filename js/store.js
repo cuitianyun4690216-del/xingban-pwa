@@ -60,6 +60,7 @@
         coins: 24680,
       },
       settings: { sound: true },
+    flags: { onboarded: false },
       activePetId: 'capybara',
       pets: {
         capybara: {
@@ -117,6 +118,7 @@
     if (tmpP) { Object.assign(state.parent, JSON.parse(tmpP)); localStorage.removeItem('xingban.tmp.parent'); }
   } catch (e) {}
   if (state.parent && state.parent.password) state.parent.password = null;
+  if (!state.flags) state.flags = { onboarded: false };
 
   /* ---------------- 持久化 ---------------- */
   let saveTimer = null;
