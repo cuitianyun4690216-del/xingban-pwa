@@ -122,6 +122,9 @@
       timerRunning() {
         return !!(XB.state.timer && XB.state.timer.running);
       },
+      careSheet() {
+        return XB.ui.careSheet;
+      },
       onboarding() {
         return XB.ui.onboarding;
       },
@@ -292,6 +295,7 @@
         <XBConfirm v-if="confirm" />
         <XBHistory v-if="historyOpen" />
         <XBOnboarding v-if="onboarding" @done="onboarding = false" />
+        <XBCareSheet v-if="careSheet" />
       </div>
     `,
   };
@@ -322,6 +326,7 @@
     ['XBWardrobe', window.XBWardrobe],
     ['XBParentGate', window.XBParentGate],
     ['XBOnboarding', window.XBOnboarding],
+    ['XBCareSheet', window.XBCareSheet],
     ['XBRedeem', window.XBRedeem],
     ['XBCostumeThumb', window.XBCostumeThumb],
     ['XBCostumeLayer', window.XBCostumeLayer],

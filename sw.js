@@ -1,5 +1,5 @@
-/* 星伴学园 Service Worker d7e1dd57f1 */
-const CACHE = 'xingban-d7e1dd57f1';
+/* 星伴学园 Service Worker 632f4fa51c */
+const CACHE = 'xingban-632f4fa51c';
 const CORE = [
   "./",
   "./assets/avatars/player.webp",
@@ -44,6 +44,7 @@ const CORE = [
   "./js/assets.js",
   "./js/audio.js",
   "./js/components/bottom-nav.js",
+  "./js/components/care-sheet.js",
   "./js/components/home-view.js",
   "./js/components/modals.js",
   "./js/components/onboarding.js",
@@ -67,6 +68,7 @@ const CORE = [
   "./js/profiles.js",
   "./js/store-parent.js",
   "./js/store-reset.js",
+  "./js/store-retention.js",
   "./js/store-world.js",
   "./js/store.js",
   "./js/vendor/vue.global.prod.js",

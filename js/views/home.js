@@ -13,6 +13,7 @@
     data() {
       return {
         petState: 'idle',
+        careOpen: false,
         burst: 0,
         speechIndex: 0,
         stateTimer: null,
@@ -66,8 +67,28 @@
         return XB.helpers.petForm(this.petId) === 'evolved';
       },
       speech() {
-        const lines = SPEECH[this.petId] || SPEECH.capybara;
+        const mem = XB.helpers.memoryLine ? XB.helpers.memoryLine(this.petId) : '';
+        const base = SPEECH[this.petId] || SPEECH.capybara;
+        const lines = mem ? [mem].concat(base) : base;
         return lines[this.speechIndex % lines.length];
+      },
+      care() {
+        return XB.helpers.careInfo();
+      },
+      wish() {
+        return XB.helpers.wishInfo();
+      },
+      weekly() {
+        return XB.helpers.weeklyInfo();
+      },
+      checkin() {
+        return XB.helpers.checkinInfo();
+      },
+      foods() {
+        return XB.helpers.foods();
+      },
+      title() {
+        return XB.helpers.currentTitle();
       },
     },
     mounted() {
@@ -148,6 +169,43 @@
       },
       openSettings() {
         XB.ui.settings = true;
+      },
+      openCare() {
+        XB.ui.careSheet = true;
+      },
+      closeCare() {
+        this.careOpen = false;
+      },
+      feed(food) {
+        const res = XB.actions.feedPet(food.id);
+        if (!res.ok) {
+          XB.actions.toast(res.reason, 'info');
+          return;
+        }
+        this.burst++;
+        this.petState = 'happy';
+        clearTimeout(this.stateTimer);
+        this.stateTimer = setTimeout(() => { this.petState = 'idle'; }, 1400);
+        XB.actions.toast(res.wishDone ? '心愿达成！它开心地转了个圈' : '吃得很满足～', 'gift');
+        if (res.wishDone && window.XBFX) XBFX.coinFly(4);
+      },
+      checkIn() {
+        const res = XB.actions.checkIn();
+        if (!res.ok) {
+          XB.actions.toast(res.reason, 'info');
+          return;
+        }
+        if (window.XBAudio) XBAudio.sfx('coin');
+        XB.actions.toast(res.continued ? '签到成功，连签 ' + res.streak + ' 天' : '今天也来啦，慢慢来就好', 'check');
+      },
+      claimWeekly() {
+        const res = XB.actions.claimWeekly();
+        if (!res.ok) {
+          XB.actions.toast(res.reason, 'info');
+          return;
+        }
+        XB.actions.toast('本周目标达成，奖励已发放', 'star');
+        if (window.XBFX) XBFX.coinFly(6);
       },
       openRedeem() {
         XB.ui.redeem = true;
@@ -241,6 +299,45 @@
           </button>
         </div>
 
+        <section class="care-card">
+          <div class="care-card__head">
+            <span class="care-card__title">今日照顾</span>
+            <span class="care-card__streak" @click="checkIn">
+              <XingIcon name="calendar" :size="12" />
+              {{ checkin.today ? '已签到 · 连签 ' + checkin.streak + ' 天' : '签到 · 连签 ' + checkin.streak + ' 天' }}
+            </span>
+          </div>
+
+          <div class="care-card__bars">
+            <div class="care-bar">
+              <span class="care-bar__label"><XingIcon name="leaf" :size="12" />饱食</span>
+              <span class="care-bar__track"><i :style="{ width: care.hunger + '%' }" :class="{ 'is-low': care.hunger < 35 }"></i></span>
+              <b>{{ care.hunger }}</b>
+            </div>
+            <div class="care-bar">
+              <span class="care-bar__label"><XingIcon name="heart" :size="12" />心情</span>
+              <span class="care-bar__track care-bar__track--mood"><i :style="{ width: care.mood + '%' }"></i></span>
+              <b>{{ care.mood }}</b>
+            </div>
+          </div>
+
+          <button class="care-wish" :class="{ 'is-done': wish.done }" @click="openCare">
+            <span class="care-wish__icon"><XingIcon :name="wish.food.icon" :size="18" /></span>
+            <span class="care-wish__body">
+              <b>{{ wish.done ? '心愿达成，它很开心' : '今天想吃：' + wish.food.name }}</b>
+              <em>{{ wish.done ? '明天再问问它想吃什么' : wish.food.desc + '（' + wish.food.cost + ' 金币）' }}</em>
+            </span>
+            <span class="care-wish__go">{{ wish.done ? '已满足' : '喂它' }}</span>
+          </button>
+
+          <div class="care-week">
+            <span class="care-week__label">本周目标 {{ weekly.done }}/{{ weekly.goal }}</span>
+            <span class="care-week__track"><i :style="{ width: weekly.percent + '%' }"></i></span>
+            <button v-if="weekly.complete && !weekly.claimed" class="care-week__claim" @click="claimWeekly">领奖励</button>
+            <span v-else-if="weekly.claimed" class="care-week__done">已领取</span>
+          </div>
+        </section>
+
         <section class="tasks-block">
           <XBSecHead title="今日学习任务" more="查看全部" @more="go('study')" />
           <div class="task-list">
@@ -270,6 +367,9 @@
             <span class="action-card__icon action-card__icon--rose"><XingIcon name="gift" :size="18" /></span>
             <span class="action-card__body"><b>奖励兑换</b><em>用金币换小奖励</em></span>
           </button>
+        </div>
+
+        
         </div>
       </section>
     `,
