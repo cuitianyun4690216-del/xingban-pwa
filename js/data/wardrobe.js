@@ -272,6 +272,114 @@
       ),
       anchors: { capybara: { x: 45, y: 33, w: 42, r: 0 }, hamster: { x: 50, y: 32, w: 40, r: 0 } },
     },
+  
+    /* ---------------- 新增 ---------------- */
+    {
+      id: 'hat-straw',
+      name: '麦田草帽',
+      slot: 'hat',
+      rarity: 'common',
+      desc: '午后散步时戴的草帽，帽檐上还留着阳光的味道。',
+      price: { currency: 'coins', amount: 140 },
+      unlock: { type: 'level', value: 1, text: '可直接购买' },
+      tile: '#E8C97B',
+      art: art(
+        '<ellipse cx="50" cy="62" rx="33" ry="10" fill="#E8C97B" stroke="#B08A46" stroke-width="1.4"/>' +
+          '<path d="M28 60 Q30 30 50 30 Q70 30 72 60 Z" fill="#F2DCA6" stroke="#B08A46" stroke-width="1.4"/>' +
+          '<path d="M30 56 Q50 50 70 56 L70 60 Q50 56 30 60 Z" fill="#C98C5A"/>' +
+          '<path d="M44 34 q6 10 2 22" stroke="#C98C5A" stroke-width="1.2" fill="none"/>' +
+          '<circle cx="58" cy="42" r="2.4" fill="#F6E3B0"/>'
+      ),
+      anchors: { capybara: { x: 44, y: 15, w: 36, r: -4 }, hamster: { x: 50, y: 13, w: 39, r: -2 } },
+    },
+    {
+      id: 'hat-cat',
+      name: '猫耳发箍',
+      slot: 'hat',
+      rarity: 'rare',
+      desc: '戴上去就忍不住想喵一声，耳朵会随心情轻轻动。',
+      price: { currency: 'coins', amount: 320 },
+      unlock: { type: 'level', value: 6, text: '卡卡 / 米粒达到 Lv.6' },
+      tile: '#F3D9C4',
+      art: art(
+        '<path d="M20 62 Q50 44 80 62" stroke="#B08A46" stroke-width="5" fill="none" stroke-linecap="round"/>' +
+          '<path d="M30 54 L34 24 L54 44 Z" fill="#F7E4D4" stroke="#B08A46" stroke-width="1.4"/>' +
+          '<path d="M70 54 L66 24 L46 44 Z" fill="#F7E4D4" stroke="#B08A46" stroke-width="1.4"/>' +
+          '<path d="M37 47 L39 33 L48 44 Z" fill="#F0B7B7"/>' +
+          '<path d="M63 47 L61 33 L52 44 Z" fill="#F0B7B7"/>'
+      ),
+      anchors: { capybara: { x: 43, y: 11, w: 40, r: -3 }, hamster: { x: 50, y: 9, w: 42, r: 0 } },
+    },
+    {
+      id: 'glasses-heart',
+      name: '爱心墨镜',
+      slot: 'face',
+      rarity: 'rare',
+      desc: '看到喜欢的东西，镜片会悄悄冒出一颗小心心。',
+      price: { currency: 'coins', amount: 360 },
+      unlock: { type: 'level', value: 7, text: '卡卡 / 米粒达到 Lv.7' },
+      tile: '#F6C6D0',
+      art: art(
+        '<path d="M34 44 C26 34 40 28 46 38 C52 28 66 34 58 44 C54 52 46 56 46 56 C46 56 38 52 34 44Z" fill="#F6C6D0" stroke="#B08A46" stroke-width="1.4" opacity=".92"/>' +
+          '<path d="M66 44 C58 34 72 28 78 38 C84 28 98 34 90 44 C86 52 78 56 78 56 C78 56 70 52 66 44Z" fill="#F6C6D0" stroke="#B08A46" stroke-width="1.4" opacity=".92"/>' +
+          '<path d="M58 44 h8" stroke="#B08A46" stroke-width="2"/>' +
+          '<path d="M80 44 l6 -4" stroke="#B08A46" stroke-width="1.6"/>' +
+          '<circle cx="42" cy="38" r="2" fill="#FFF8E4"/>'
+      ),
+      anchors: { capybara: { x: 41, y: 18, w: 25, r: -2 }, hamster: { x: 50, y: 17, w: 30, r: 0 } },
+    },
+    {
+      id: 'scarf-check',
+      name: '格纹围巾',
+      slot: 'neck',
+      rarity: 'common',
+      desc: '厚实柔软的格子围巾，冬天裹上就不想起床。',
+      price: { currency: 'coins', amount: 160 },
+      unlock: { type: 'level', value: 1, text: '可直接购买' },
+      tile: '#D9C6A6',
+      art: art(
+        '<path d="M22 40 Q50 56 78 40 L76 50 Q50 66 24 50 Z" fill="#D9C6A6" stroke="#B08A46" stroke-width="1.4"/>' +
+          '<path d="M30 62 L26 92 L38 86 L42 64 Z" fill="#C9B08A" stroke="#B08A46" stroke-width="1.2"/>' +
+          '<path d="M30 66 h10 M28 74 h10" stroke="#8B6B45" stroke-width="1"/>' +
+          '<path d="M46 46 h8 M62 46 h8" stroke="#8B6B45" stroke-width="1" opacity=".7"/>'
+      ),
+      anchors: { capybara: { x: 45, y: 33, w: 42, r: 0 }, hamster: { x: 50, y: 32, w: 40, r: 0 } },
+    },
+    {
+      id: 'bag-picnic',
+      name: '野餐小篮',
+      slot: 'back',
+      rarity: 'rare',
+      desc: '篮子里总藏着一点点心，是留给你的。',
+      price: { currency: 'coins', amount: 340 },
+      unlock: { type: 'level', value: 8, text: '卡卡 / 米粒达到 Lv.8' },
+      tile: '#E2C08A',
+      art: art(
+        '<path d="M32 44 Q50 22 68 44" stroke="#B08A46" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+          '<rect x="26" y="44" width="48" height="32" rx="6" fill="#E2C08A" stroke="#B08A46" stroke-width="1.4"/>' +
+          '<path d="M26 56 h48" stroke="#B08A46" stroke-width="1.2"/>' +
+          '<path d="M40 44 v32 M60 44 v32" stroke="#C9A96A" stroke-width="1" opacity=".7"/>' +
+          '<circle cx="50" cy="66" r="3" fill="#F3DFAF"/>'
+      ),
+      anchors: { capybara: { x: 62, y: 46, w: 30, r: 6 }, hamster: { x: 63, y: 44, w: 28, r: 4 } },
+    },
+    {
+      id: 'pin-moon',
+      name: '月牙胸针',
+      slot: 'accessory',
+      rarity: 'rare',
+      desc: '一枚小小的月牙，夜里会发出很淡的光。',
+      price: { currency: 'coins', amount: 300 },
+      unlock: { type: 'level', value: 5, text: '卡卡 / 米粒达到 Lv.5' },
+      tile: '#F3DFAF',
+      art: art(
+        '<path d="M58 22 a22 22 0 1 0 0 40 a18 18 0 1 1 0 -40z" fill="#F3DFAF" stroke="#C9A96A" stroke-width="1.4"/>' +
+          '<circle cx="64" cy="33" r="2" fill="#FFF8E4"/>' +
+          '<circle cx="70" cy="44" r="1.4" fill="#FFF8E4"/>'
+      ),
+      anchors: { capybara: { x: 28, y: 13, w: 12, r: -8 }, hamster: { x: 32, y: 12, w: 13, r: -6 } },
+    },
+  
   ];
 
   const SLOTS = [
