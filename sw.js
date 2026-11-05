@@ -1,5 +1,5 @@
-/* 星伴学园 Service Worker 3874c89658 */
-const CACHE = 'xingban-3874c89658';
+/* 星伴学园 Service Worker 63bdc23c13 */
+const CACHE = 'xingban-63bdc23c13';
 const CORE = [
   "./",
   "./assets/avatars/player.webp",
@@ -10,6 +10,8 @@ const CORE = [
   "./assets/icons/icon-192.png",
   "./assets/icons/icon-512.png",
   "./assets/icons/icon-maskable-512.png",
+  "./assets/pets/capybara/adult.webp",
+  "./assets/pets/capybara/baby.webp",
   "./assets/pets/capybara/blink.png",
   "./assets/pets/capybara/blink.webp",
   "./assets/pets/capybara/eat.png",
@@ -22,6 +24,8 @@ const CORE = [
   "./assets/pets/capybara/idle.webp",
   "./assets/pets/capybara/sleep.png",
   "./assets/pets/capybara/sleep.webp",
+  "./assets/pets/hamster/adult.webp",
+  "./assets/pets/hamster/baby.webp",
   "./assets/pets/hamster/blink.png",
   "./assets/pets/hamster/blink.webp",
   "./assets/pets/hamster/eat.png",

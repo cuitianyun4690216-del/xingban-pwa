@@ -866,3 +866,51 @@
 .pet-care .care-bar {
   grid-template-columns: 46px 1fr 26px;
 }
+
+/* 形态长廊 --------------------------------------------------------------- */
+.form-gallery { margin: 10px 0; }
+
+.form-gallery__title {
+  font-family: var(--font-title);
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+  color: var(--gold-3);
+  margin-bottom: 8px;
+}
+
+.form-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.form-row::-webkit-scrollbar { display: none; }
+
+.form-card {
+  flex: 0 0 92px;
+  padding: 8px 6px 7px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 253, 247, 0.96), rgba(246, 235, 216, 0.92));
+  border: 1px solid rgba(201, 169, 106, 0.45);
+  text-align: center;
+}
+
+.form-card.is-locked { opacity: 0.55; filter: grayscale(0.6); }
+
+.form-card__art {
+  display: block;
+  height: 74px;
+  margin-bottom: 4px;
+}
+
+.form-card__art img {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.form-card b { display: block; font-size: 10px; color: var(--ink-1); }
+.form-card em { display: block; font-style: normal; font-size: 8.5px; color: var(--ink-4); margin-top: 1px; }

@@ -117,6 +117,17 @@
           XB.actions.presentResult(res);
         }
       },
+      forms() {
+        const lv = this.pet.level;
+        const id = this.petId;
+        const evo = (this.state.evolution[id] || 0) >= 3;
+        return [
+          { id: 'baby', name: '幼年形态', src: this.$assets.pet(id, 'baby'), open: lv >= 1, note: 'Lv.1 起', lock: '' },
+          { id: 'grow', name: '成长形态', src: this.$assets.pet(id, 'idle'), open: lv >= 1, note: '当前', lock: '' },
+          { id: 'adult', name: '成年形态', src: this.$assets.pet(id, 'adult'), open: lv >= 8, note: 'Lv.8 解锁', lock: 'Lv.8 解锁' },
+          { id: 'star', name: '星辉形态', src: this.$assets.pet(id, 'evolved'), open: evo, note: '已进化', lock: '完成进化解锁' },
+        ];
+      },
       openCare() {
         XB.ui.careSheet = true;
       },
@@ -258,6 +269,19 @@
             <b>{{ care.energy }}</b>
           </div>
           <p class="pet-care__wish">{{ wish.done ? '今天的心愿已经满足啦' : '今天想吃：' + wish.food.name }}</p>
+        </section>
+
+        <section class="form-gallery">
+          <p class="form-gallery__title">形态长廊</p>
+          <div class="form-row">
+            <div v-for="f in forms()" :key="f.id" class="form-card" :class="{ 'is-locked': !f.open }">
+              <span class="form-card__art">
+                <img :src="f.src" :alt="f.name" draggable="false" />
+              </span>
+              <b>{{ f.name }}</b>
+              <em>{{ f.open ? f.note : f.lock }}</em>
+            </div>
+          </div>
         </section>
 
         <section class="panel dress">
