@@ -1,0 +1,350 @@
+/* ==========================================================================
+   星伴学园 · 宠物角色渲染（呼吸 / 眨眼 / 开心 / 睡觉 / 进食 / 抚摸）
+   ========================================================================== */
+
+.pet-actor {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.pet-actor__float {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  animation: pet-float 6.5s var(--ease-soft) infinite;
+  will-change: transform;
+}
+
+.pet-actor__body {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  transform-origin: 50% 92%;
+  animation: pet-breathe 4.8s var(--ease-soft) infinite;
+  will-change: transform;
+}
+
+.pet-actor__frame {
+  position: relative;
+  height: 100%;
+  width: auto;
+  aspect-ratio: var(--ar, 0.86);
+  max-width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.pet-actor__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 100%;
+  filter: var(--shadow-pet);
+  transition: filter 0.4s;
+  pointer-events: none;
+}
+
+.pet-actor__blink {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 100%;
+  opacity: 0;
+  transition: opacity 0.08s linear;
+  pointer-events: none;
+}
+
+.pet-actor__blink.is-on {
+  opacity: 1;
+}
+
+.pet-state-enter-active,
+.pet-state-leave-active {
+  transition: opacity 0.32s var(--ease-out);
+}
+
+.pet-state-enter-from,
+.pet-state-leave-to {
+  opacity: 0;
+}
+
+.heart-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 待机 */
+@keyframes pet-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scale(1, 1) rotate(0deg);
+  }
+  35% {
+    transform: translateY(-3px) scale(1.008, 0.994) rotate(-0.35deg);
+  }
+  70% {
+    transform: translateY(-1px) scale(0.996, 1.006) rotate(0.25deg);
+  }
+}
+
+@keyframes pet-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+/* 摇头 */
+.pet-actor.is-shake .pet-actor__body {
+  animation: pet-shake 0.7s var(--ease-soft);
+}
+
+@keyframes pet-shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  18% {
+    transform: rotate(-2.2deg) translateY(-1px);
+  }
+  38% {
+    transform: rotate(1.9deg);
+  }
+  58% {
+    transform: rotate(-1.4deg);
+  }
+  78% {
+    transform: rotate(0.8deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* 开心 */
+.pet-actor.is-happy .pet-actor__body {
+  animation: pet-hop 1.15s var(--ease-soft) infinite;
+}
+
+.pet-actor.is-happy .pet-actor__float {
+  animation-duration: 3.2s;
+}
+
+@keyframes pet-hop {
+  0%,
+  100% {
+    transform: translateY(0) scale(1.01, 0.98);
+  }
+  28% {
+    transform: translateY(-14px) scale(0.98, 1.03) rotate(-1.2deg);
+  }
+  48% {
+    transform: translateY(-18px) scale(1, 1) rotate(0.8deg);
+  }
+  72% {
+    transform: translateY(0) scale(1.04, 0.95) rotate(0deg);
+  }
+}
+
+/* 睡觉 */
+.pet-actor.is-sleep .pet-actor__body {
+  animation: pet-sleep 6.4s var(--ease-soft) infinite;
+}
+
+.pet-actor.is-sleep .pet-actor__float {
+  animation: none;
+}
+
+.pet-actor.is-sleep .pet-actor__img {
+  filter: var(--shadow-pet) saturate(0.94) brightness(0.97);
+}
+
+@keyframes pet-sleep {
+  0%,
+  100% {
+    transform: scale(1.002, 0.996) translateY(1px);
+  }
+  50% {
+    transform: scale(0.994, 1.008) translateY(-2px);
+  }
+}
+
+/* 吃东西 */
+.pet-actor.is-eat .pet-actor__body {
+  animation: pet-eat 1.3s var(--ease-soft) infinite;
+}
+
+@keyframes pet-eat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-3px) rotate(-1deg) scale(1.006, 0.996);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  75% {
+    transform: translateY(-2px) rotate(1deg) scale(1.004, 0.998);
+  }
+}
+
+/* 被抚摸 */
+.pet-actor.is-pet .pet-actor__body {
+  animation: petting 1.05s var(--ease-spring) both;
+}
+
+@keyframes petting {
+  0% {
+    transform: scale(1);
+  }
+  18% {
+    transform: scale(1.04, 0.94) translateY(6px);
+  }
+  42% {
+    transform: scale(0.99, 1.02) translateY(-3px) rotate(-1.4deg);
+  }
+  62% {
+    transform: scale(1.01, 0.99) translateY(0) rotate(1.2deg);
+  }
+  80% {
+    transform: scale(1, 1) rotate(-0.5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* 切换 */
+.pet-swap-left-enter-active,
+.pet-swap-right-enter-active {
+  transition: opacity 0.45s var(--ease-out), transform 0.55s var(--ease-spring), filter 0.4s;
+}
+
+.pet-swap-left-leave-active,
+.pet-swap-right-leave-active {
+  transition: opacity 0.26s ease, transform 0.34s ease, filter 0.28s;
+}
+
+.pet-swap-left-enter-from {
+  opacity: 0;
+  transform: translateX(40px) scale(0.92) rotate(2.5deg);
+  filter: blur(5px);
+}
+
+.pet-swap-left-leave-to {
+  opacity: 0;
+  transform: translateX(-34px) scale(0.94) rotate(-2.5deg);
+  filter: blur(4px);
+}
+
+.pet-swap-right-enter-from {
+  opacity: 0;
+  transform: translateX(-40px) scale(0.92) rotate(-2.5deg);
+  filter: blur(5px);
+}
+
+.pet-swap-right-leave-to {
+  opacity: 0;
+  transform: translateX(34px) scale(0.94) rotate(2.5deg);
+  filter: blur(4px);
+}
+
+/* 爱心 */
+.heart-pop {
+  position: absolute;
+  color: var(--rose-2);
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(219, 171, 180, 0.65));
+  animation: heart-rise 1.5s var(--ease-out) forwards;
+}
+
+@keyframes heart-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.5);
+  }
+  22% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-58px) scale(0.9) rotate(var(--rot, 8deg));
+  }
+}
+
+/* 星光 */
+.sparkle-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  color: #FFE9B8;
+  opacity: 0;
+  filter: drop-shadow(0 0 7px rgba(255, 232, 180, 0.95));
+  animation: twinkle var(--dur, 3.4s) var(--ease-soft) infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.sparkle svg {
+  width: var(--size, 12px);
+  height: var(--size, 12px);
+}
+
+/* 骨架 / 失败 */
+.pet-skeleton {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 88%;
+  border-radius: 46% 46% 40% 40%;
+  background: linear-gradient(180deg, rgba(255, 250, 238, 0.5), rgba(235, 224, 204, 0.3));
+  filter: blur(10px);
+  animation: glow-pulse 2.2s var(--ease-soft) infinite;
+}
+
+.pet-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  font-size: 10.5px;
+  line-height: 1.7;
+  color: var(--ink-3);
+  padding: 0 16px;
+}
+
+.pet-fallback strong {
+  font-size: 11px;
+  color: var(--ink-2);
+}

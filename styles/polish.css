@@ -1,0 +1,393 @@
+/* ==========================================================================
+   星伴学园 · 手感与特效（第五阶段）
+   ========================================================================== */
+
+/* 统一按压反馈 ---------------------------------------------------------- */
+.btn,
+.chip,
+.nav__item,
+.action-card,
+.quest,
+.slot,
+.rail__btn,
+.set-row .switch {
+  transition: transform 0.16s cubic-bezier(0.22, 0.9, 0.28, 1), box-shadow 0.22s ease,
+    filter 0.22s ease, background-color 0.22s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn.is-press,
+.chip.is-press,
+.nav__item.is-press,
+.action-card.is-press,
+.slot.is-press {
+  transform: scale(0.955);
+}
+
+.btn--primary.is-press,
+.btn--gold.is-press {
+  box-shadow: 0 0 0 3px rgba(226, 199, 140, 0.28), 0 10px 22px -14px rgba(40, 24, 8, 0.75);
+  filter: brightness(1.06);
+}
+
+.nav__item.is-press {
+  transform: scale(0.94) translateY(1px);
+}
+
+.action-card.is-press {
+  transform: scale(0.965);
+  border-color: rgba(226, 199, 140, 0.75);
+}
+
+.quest.is-press {
+  transform: scale(0.988);
+}
+
+/* 卡片抬起 -------------------------------------------------------------- */
+.action-card,
+.quest,
+.cst-card,
+.furniture-card {
+  will-change: transform;
+}
+
+@media (hover: hover) {
+  .action-card:hover,
+  .furniture-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(226, 199, 140, 0.7);
+    box-shadow: 0 12px 24px -18px rgba(30, 20, 8, 0.85);
+  }
+}
+
+/* 金币飞入 / 漂浮文字 ---------------------------------------------------- */
+.fx-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.fx-coin {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #fff7d8, #efce8a 55%, #b98a3e);
+  box-shadow: 0 0 10px rgba(240, 205, 130, 0.85);
+  will-change: transform, opacity;
+}
+
+.fx-float {
+  position: absolute;
+  font-family: var(--font-num);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #f6e3b6;
+  text-shadow: 0 2px 8px rgba(24, 16, 8, 0.6);
+  will-change: transform, opacity;
+}
+
+.fx-float--warm {
+  color: #ffd9a0;
+}
+
+.pill.is-bump {
+  animation: pillBump 0.46s cubic-bezier(0.22, 1.2, 0.3, 1);
+}
+
+@keyframes pillBump {
+  0% {
+    transform: scale(1);
+  }
+  32% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 任务完成 -------------------------------------------------------------- */
+.quest.is-just-done {
+  animation: questDone 0.62s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+@keyframes questDone {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.018);
+    box-shadow: 0 0 0 2px rgba(226, 199, 140, 0.5), 0 10px 24px -16px rgba(0, 0, 0, 0.7);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.quest__check.is-done {
+  animation: checkPop 0.42s cubic-bezier(0.2, 1.4, 0.3, 1);
+}
+
+@keyframes checkPop {
+  0% {
+    transform: scale(0.7);
+  }
+  55% {
+    transform: scale(1.16);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 宠物生命感 ------------------------------------------------------------ */
+.pet-actor__img {
+  transition: filter 0.35s ease;
+}
+
+.pet-actor.is-yawn .pet-actor__img {
+  animation: petYawn 1.8s ease-in-out;
+}
+
+.pet-actor.is-stretch .pet-actor__img {
+  animation: petStretch 2s ease-in-out;
+}
+
+.pet-actor.is-look .pet-actor__img {
+  animation: petLook 2.2s ease-in-out;
+}
+
+.pet-actor.is-hop .pet-actor__img {
+  animation: petHop 0.52s cubic-bezier(0.3, 1.3, 0.4, 1);
+}
+
+@keyframes petYawn {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.045) rotate(-1deg);
+  }
+  55% {
+    transform: scale(0.985) rotate(1.4deg);
+  }
+  75% {
+    transform: scale(1.02) rotate(-0.6deg);
+  }
+}
+
+@keyframes petStretch {
+  0%,
+  100% {
+    transform: scale(1) translateY(0);
+  }
+  35% {
+    transform: scale(1.05) translateY(2px) rotate(-1.2deg);
+  }
+  65% {
+    transform: scale(0.99) translateY(-2px) rotate(1deg);
+  }
+}
+
+@keyframes petLook {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0);
+  }
+  30% {
+    transform: translateX(-3px) rotate(-0.8deg);
+  }
+  60% {
+    transform: translateX(3px) rotate(0.8deg);
+  }
+}
+
+@keyframes petHop {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-10px) scale(1.02);
+  }
+  60% {
+    transform: translateY(0) scale(0.985);
+  }
+  80% {
+    transform: translateY(-3px) scale(1.005);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pet-actor__fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.pet-spark {
+  position: absolute;
+  width: var(--s, 10px);
+  height: var(--s, 10px);
+  left: var(--x, 50%);
+  top: var(--y, 40%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #fff, rgba(240, 205, 130, 0.9) 55%, rgba(240, 205, 130, 0) 72%);
+  opacity: 0;
+  animation: sparkUp 1.25s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+  animation-delay: var(--d, 0ms);
+  will-change: transform, opacity;
+}
+
+.pet-spark--heart {
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: linear-gradient(150deg, #ffe6ee, #f3b9cd 70%);
+  box-shadow: 0 0 10px rgba(243, 185, 205, 0.6);
+}
+
+.pet-spark--star {
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  border-radius: 0;
+  background: linear-gradient(160deg, #fff8dd, #efce8a);
+  box-shadow: none;
+}
+
+@keyframes sparkUp {
+  0% {
+    transform: translate(0, 0) scale(0.4);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(var(--dx, 0px), var(--dy, -46px)) scale(1.05);
+    opacity: 0;
+  }
+}
+
+/* 宠物被抚摸时的高光 ---------------------------------------------------- */
+.pet-actor.is-petting .pet-actor__img {
+  filter: brightness(1.05) saturate(1.04);
+}
+
+/* 奖励卡与升级弹窗的柔和光 ---------------------------------------------- */
+.modal--reward .modal__body,
+.lu {
+  animation: rewardGlow 1.6s ease-in-out;
+}
+
+@keyframes rewardGlow {
+  0% {
+    filter: brightness(1);
+  }
+  35% {
+    filter: brightness(1.07);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+/* 页面切换：更柔和的淡入 + 位移 ------------------------------------------ */
+.page {
+  animation: pageInSoft 0.36s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+
+@keyframes pageInSoft {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.997);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .pet-actor__img,
+  .fx-coin,
+  .fx-float,
+  .quest.is-just-done {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* 设置面板 · 声音分组 ---------------------------------------------------- */
+.set-group {
+  margin: 0 0 6px;
+  padding: 10px 12px 4px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 253, 247, 0.92), rgba(244, 234, 214, 0.85));
+  border: 1px solid rgba(201, 169, 106, 0.38);
+}
+
+.set-group__title {
+  font-family: var(--font-title);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  color: var(--gold-3);
+  margin-bottom: 6px;
+}
+
+.set-group .set-row {
+  border-top: none;
+  padding: 7px 0;
+}
+
+.set-slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 0 9px;
+  font-size: 10.5px;
+  color: var(--ink-3);
+}
+
+.set-slider b {
+  font-family: var(--font-num);
+  font-size: 10.5px;
+  color: var(--gold-3);
+  min-width: 34px;
+  text-align: right;
+}
+
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(226, 199, 140, 0.95), rgba(201, 169, 106, 0.25));
+  outline: none;
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #fffdf6, #f0d59b 60%, #c9a96a);
+  border: 1px solid rgba(169, 133, 74, 0.7);
+  box-shadow: 0 2px 6px rgba(40, 26, 10, 0.35);
+}
+
+.range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: #f0d59b;
+}

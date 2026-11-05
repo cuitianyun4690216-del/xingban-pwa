@@ -1,0 +1,284 @@
+/* ==========================================================================
+   星伴学园 · 星宠家园
+   ========================================================================== */
+
+.garden-scene {
+  position: relative;
+  height: 318px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: 50% 58%;
+  border: 1px solid rgba(201, 169, 106, 0.75);
+  box-shadow: 0 18px 34px -24px rgba(10, 8, 14, 0.95), inset 0 0 0 3px rgba(28, 22, 38, 0.18);
+  overflow: hidden;
+  touch-action: none;
+}
+
+.garden-scene__veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(26, 20, 36, 0.35) 0%, rgba(26, 20, 36, 0) 26%, rgba(26, 20, 36, 0) 60%, rgba(26, 20, 36, 0.5) 100%),
+    radial-gradient(120% 80% at 50% 40%, rgba(255, 244, 220, 0.06), rgba(20, 14, 30, 0.28) 100%);
+}
+
+.garden-pet {
+  position: absolute;
+  left: 26%;
+  bottom: 6%;
+  width: 104px;
+  height: 130px;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.garden-item {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  touch-action: none;
+}
+
+.garden-item svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 10px rgba(20, 14, 10, 0.38));
+}
+
+.garden-item.is-editing {
+  cursor: grab;
+  outline: 1px dashed rgba(255, 236, 190, 0.55);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+.garden-item__del {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #FFF3E0;
+  background: rgba(120, 60, 50, 0.92);
+  border: 1px solid rgba(255, 220, 190, 0.6);
+}
+
+.garden-scene__hint {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  color: #F6E9CC;
+  background: rgba(30, 24, 42, 0.72);
+  border: 1px solid rgba(201, 169, 106, 0.5);
+  z-index: 6;
+  white-space: nowrap;
+}
+
+.garden-scene__edit {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  z-index: 6;
+}
+
+.garden-scene__edit .btn {
+  height: 28px;
+  padding: 0 11px;
+  font-size: 10.5px;
+}
+
+/* 场景切换 */
+.scene-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 2px 2px 4px;
+  scrollbar-width: none;
+}
+
+.scene-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.scene-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: var(--r-pill);
+  font-size: 10.5px;
+  color: var(--ink-3);
+  background: linear-gradient(170deg, rgba(253, 248, 237, 0.9), rgba(238, 225, 202, 0.85));
+  border: 1px solid rgba(201, 169, 106, 0.45);
+}
+
+.scene-chip.is-on {
+  color: #5A4020;
+  background: linear-gradient(180deg, #F8EAC6, #E5C995);
+  border-color: var(--gold-2);
+  box-shadow: 0 3px 8px -5px rgba(90, 60, 30, 0.8);
+}
+
+.scene-chip.is-locked {
+  opacity: 0.6;
+}
+
+.scene-chip em {
+  font-style: normal;
+  font-size: 8.5px;
+  color: var(--ink-4);
+}
+
+/* 家园等级 */
+.home-level {
+  padding: 10px 14px 12px;
+}
+
+.home-level__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.home-level__lv {
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold-3);
+}
+
+.home-level__hint {
+  font-size: 9.5px;
+  color: var(--ink-3);
+}
+
+.home-level__desc {
+  margin-top: 6px;
+  font-size: 9.5px;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+}
+
+/* 家具 */
+.furniture-list {
+  padding: 10px 14px 12px;
+}
+
+.furniture-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-top: 9px;
+}
+
+.furniture-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 7px 4px 6px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255, 252, 245, 0.95), rgba(243, 233, 214, 0.9));
+  border: 1px solid rgba(201, 169, 106, 0.42);
+  transition: transform 0.2s var(--ease-spring);
+}
+
+.furniture-card:active {
+  transform: scale(0.95);
+}
+
+.furniture-card__art {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+}
+
+.furniture-card__art svg {
+  width: 100%;
+  height: 100%;
+}
+
+.furniture-card__name {
+  font-size: 9.5px;
+  color: var(--ink-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.furniture-card__meta {
+  font-size: 8px;
+  color: var(--ink-4);
+}
+
+/* 家具商店 */
+.shop-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shop-item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 11px;
+  background: rgba(255, 252, 245, 0.72);
+  border: 1px solid rgba(201, 169, 106, 0.35);
+}
+
+.shop-item__art {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  background: radial-gradient(circle at 40% 30%, rgba(255, 255, 255, 0.9), rgba(240, 230, 210, 0.85));
+  border: 1px solid rgba(201, 169, 106, 0.3);
+}
+
+.shop-item__art svg {
+  width: 84%;
+  height: 84%;
+}
+
+.shop-item__body {
+  min-width: 0;
+}
+
+.shop-item__body b {
+  font-size: 12px;
+  color: var(--ink-1);
+}
+
+.shop-item__body em {
+  display: block;
+  font-style: normal;
+  font-size: 9.5px;
+  color: var(--ink-3);
+  margin: 2px 0 5px;
+}
+
+.shop-item__body .btn {
+  height: 26px;
+  padding: 0 12px;
+  font-size: 10.5px;
+}

@@ -1,0 +1,125 @@
+/* ==========================================================================
+   星伴学园 · 响应式
+   ========================================================================== */
+
+/* 小屏（≤ 374px） */
+@media (max-width: 374px) {
+  .hud__exp,
+  .hud__title {
+    display: none;
+  }
+
+  .pill {
+    font-size: 11px;
+    padding: 0 8px 0 5px;
+    height: 26px;
+  }
+
+  .pill svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .hud__name {
+    font-size: 13px;
+  }
+
+  .stage {
+    height: 320px;
+  }
+
+  .stage--pet {
+    height: 280px;
+  }
+
+  .stage__ring {
+    width: 262px;
+    height: 262px;
+  }
+
+  .timer {
+    grid-template-columns: 92px 1fr;
+    gap: 9px;
+    padding: 10px;
+  }
+
+  .timer__ring-wrap {
+    width: 92px;
+    height: 92px;
+  }
+
+  .timer__clock {
+    font-size: 18px;
+  }
+
+  .quest {
+    padding: 8px;
+    gap: 7px;
+  }
+
+  .coll {
+    grid-template-columns: 84px 1fr;
+  }
+
+  .coll__art {
+    width: 84px;
+    height: 102px;
+  }
+
+  .coll__art img {
+    height: 94px;
+  }
+
+  .page {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* 矮屏（≤ 720px） */
+@media (max-height: 720px) {
+  .stage {
+    height: 300px;
+  }
+
+  .stage--pet {
+    height: 262px;
+  }
+
+  .stage__podium {
+    width: 190px;
+    height: 46px;
+  }
+
+  .page {
+    gap: 8px;
+  }
+}
+
+/* 大屏：手机容器内不放大字号，只增加留白 */
+@media (min-width: 900px) {
+  .app-scroll {
+    inset: calc(74px + var(--safe-top)) 0 0;
+  }
+
+  .page {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .hud {
+    padding-top: 10px;
+  }
+}
+
+/* 横屏手机：保持竖屏容器比例 */
+@media (max-height: 560px) and (orientation: landscape) {
+  .app-frame {
+    height: 100dvh;
+    border-radius: 0;
+  }
+
+  .stage {
+    height: 260px;
+  }
+}

@@ -1,0 +1,122 @@
+/* ==========================================================================
+   星伴学园 · 设计令牌 v2 · 典雅奇幻手游
+   ivory / parchment / champagne gold / dusty lavender / mist blue / sage
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* 象牙白 · 羊皮纸 */
+  --ivory-0: #FFFCF6;
+  --ivory-1: #FBF5E9;
+  --ivory-2: #F5EBD9;
+  --ivory-3: #EBDDC4;
+  --parch-0: #F9F1E1;
+  --parch-1: #F0E2C8;
+  --parch-2: #E4D2B2;
+
+  /* 香槟金 / 古铜金 */
+  --gold-0: #F7EACA;
+  --gold-1: #E3CA96;
+  --gold-2: #C9A96A;
+  --gold-3: #A9854A;
+  --gold-4: #7C5E34;
+
+  /* 灰调薰衣草紫 */
+  --lav-0: #F0EBF9;
+  --lav-1: #DED4EF;
+  --lav-2: #B9A9D5;
+  --lav-3: #8E7FAF;
+  --lav-4: #6A5C88;
+  --lav-5: #4A3F63;
+
+  /* 雾霭蓝 */
+  --blue-1: #CBDCEC;
+  --blue-2: #93B2CD;
+  --blue-3: #5F80A4;
+
+  /* 鼠尾草绿 */
+  --sage-1: #D6E2D3;
+  --sage-2: #A8BFA5;
+  --sage-3: #779171;
+
+  /* 玫瑰粉 */
+  --rose-1: #F2DADE;
+  --rose-2: #DBABB4;
+  --rose-3: #B87B86;
+
+  /* 墨色 */
+  --ink-1: #3B3448;
+  --ink-2: #574E68;
+  --ink-3: #7A7190;
+  --ink-4: #A79DB8;
+  --ink-5: #C9C1D6;
+  --ink-6: #E4DFEC;
+
+  --night-0: #241E31;
+  --night-1: #1A1624;
+
+  /* 语义色 */
+  --text-strong: var(--ink-1);
+  --text: var(--ink-2);
+  --text-soft: var(--ink-3);
+  --text-gold: var(--gold-3);
+
+  /* 渐变 */
+  --grad-parch: linear-gradient(168deg, #FDF8ED 0%, #F7EDDB 48%, #EFE0C6 100%);
+  --grad-parch-deep: linear-gradient(168deg, #F6EAD4 0%, #EEDFC3 55%, #E3D0AE 100%);
+  --grad-gold: linear-gradient(135deg, #F8ECCB 0%, #E3CA96 34%, #C9A96A 58%, #F2DFB2 100%);
+  --grad-gold-line: linear-gradient(90deg, rgba(201, 169, 106, 0) 0%, #C9A96A 22%, #E8D5A6 50%, #C9A96A 78%, rgba(201, 169, 106, 0) 100%);
+  --grad-lav: linear-gradient(163deg, #A99BCC 0%, #8375AC 46%, #5F527F 100%);
+  --grad-night: linear-gradient(180deg, rgba(36, 30, 49, 0.92), rgba(26, 22, 36, 0.96));
+  --grad-glass: linear-gradient(180deg, rgba(253, 248, 237, 0.94) 0%, rgba(246, 235, 214, 0.82) 100%);
+  --grad-glass-dark: linear-gradient(180deg, rgba(58, 48, 74, 0.82) 0%, rgba(38, 31, 51, 0.9) 100%);
+
+  /* 描边 */
+  --line-gold: rgba(201, 169, 106, 0.85);
+  --line-gold-soft: rgba(201, 169, 106, 0.45);
+  --line-gold-faint: rgba(201, 169, 106, 0.22);
+  --line-light: rgba(255, 255, 255, 0.7);
+
+  /* 阴影 */
+  --shadow-panel: 0 18px 36px -22px rgba(43, 31, 20, 0.55), 0 2px 0 rgba(255, 255, 255, 0.5) inset;
+  --shadow-float: 0 26px 50px -26px rgba(30, 22, 18, 0.65);
+  --shadow-soft: 0 8px 18px -12px rgba(43, 31, 20, 0.45);
+  --shadow-gold: 0 0 18px -4px rgba(201, 169, 106, 0.55);
+  --shadow-modal: 0 40px 90px -40px rgba(10, 8, 14, 0.9);
+  --shadow-pet: drop-shadow(0 18px 22px rgba(53, 38, 28, 0.32));
+
+  /* 圆角 */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  /* 动效 */
+  --ease-out: cubic-bezier(0.22, 0.88, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 字体 */
+  --font-title: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --font-body: "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Source Han Sans SC", "Noto Sans SC",
+    "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  --font-num: "Optima", "Palatino Linotype", "Georgia", var(--font-title);
+
+  /* 布局 */
+  --frame-max: 430px;
+  --nav-h: 66px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* 状态 / 分类色 */
+  --tint-rose: #C88A93;
+  --tint-blue: #6E8FB3;
+  --tint-lavender: #8A78B8;
+  --tint-sage: #79936F;
+  --tint-mint: #6FA98F;
+  --tint-gold: #B08644;
+  --tint-violet: #8C6FB8;
+}

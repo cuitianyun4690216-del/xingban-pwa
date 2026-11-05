@@ -1,0 +1,317 @@
+/* ==========================================================================
+   星伴学园 · 装扮衣橱 / 分层装扮
+   ========================================================================== */
+
+.cst-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cst-layer--back {
+  z-index: 0;
+}
+
+.cst-layer--front {
+  z-index: 3;
+}
+
+.cst {
+  position: absolute;
+  display: block;
+}
+
+.cst svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 2px 3px rgba(40, 26, 12, 0.28));
+}
+
+.modal--wardrobe {
+  max-width: 360px;
+}
+
+.wd-head {
+  padding-bottom: 2px;
+}
+
+.wd-pets {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.wd-preview {
+  display: grid;
+  grid-template-columns: 128px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 252, 245, 0.7), rgba(240, 228, 208, 0.55));
+  border: 1px solid rgba(201, 169, 106, 0.4);
+}
+
+.wd-preview__stage {
+  position: relative;
+  height: 132px;
+  border-radius: 10px;
+  background: radial-gradient(60% 50% at 50% 62%, rgba(255, 244, 220, 0.9), rgba(236, 224, 200, 0.35) 70%, transparent);
+  overflow: hidden;
+}
+
+.wd-preview__side {
+  min-width: 0;
+}
+
+.wd-preview__name {
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink-1);
+}
+
+.wd-preview__sub {
+  font-size: 9.5px;
+  color: var(--ink-3);
+  margin-top: 2px;
+}
+
+.wd-preview__list {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.wd-preview__list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--ink-2);
+}
+
+.wd-mini {
+  font-size: 9px;
+  color: var(--gold-3);
+  border: 1px solid rgba(201, 169, 106, 0.5);
+  border-radius: var(--r-pill);
+  padding: 1px 7px;
+  background: rgba(255, 252, 245, 0.7);
+}
+
+.wd-empty {
+  font-size: 9.5px;
+  color: var(--ink-4);
+}
+
+.wd-slots {
+  margin: 9px 0 7px;
+}
+
+.wd-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  max-height: 34vh;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.wd-item {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 9px;
+  padding: 8px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, rgba(255, 252, 245, 0.96), rgba(243, 233, 214, 0.9));
+  border: 1px solid rgba(201, 169, 106, 0.45);
+}
+
+.wd-item.is-locked {
+  opacity: 0.72;
+}
+
+.wd-item__row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.wd-item__row b {
+  font-size: 11.5px;
+  color: var(--ink-1);
+}
+
+.wd-rarity {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.wd-item__desc {
+  font-size: 9.5px;
+  line-height: 1.5;
+  color: var(--ink-3);
+  margin-top: 1px;
+}
+
+.wd-item__lock {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 3px;
+  font-size: 9px;
+  color: var(--rose-3);
+}
+
+.wd-item__actions {
+  margin-top: 5px;
+}
+
+.wd-item__actions .btn {
+  height: 26px;
+  padding: 0 12px;
+  font-size: 10.5px;
+}
+
+.cst-thumb {
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: radial-gradient(circle at 40% 30%, rgba(255, 255, 255, 0.95), rgba(240, 230, 210, 0.9));
+  border: 1px solid color-mix(in srgb, var(--tile, #C9A96A) 55%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  flex-shrink: 0;
+  padding: 5px;
+}
+
+.cst-thumb svg {
+  width: 100%;
+  height: 100%;
+}
+
+.wd-wallet {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* 宠物页装扮栏 */
+.dress-slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.dress-slot {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 8px;
+  border-radius: 9px;
+  background: linear-gradient(180deg, rgba(255, 252, 245, 0.95), rgba(243, 233, 214, 0.88));
+  border: 1px solid rgba(201, 169, 106, 0.4);
+}
+
+.dress-slot__icon {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--gold-3);
+  background: rgba(243, 227, 188, 0.55);
+}
+
+.dress-slot__body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.dress-slot__body b {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+
+.dress-slot__body em {
+  font-style: normal;
+  font-size: 10.5px;
+  color: var(--ink-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 进化 */
+.evo-line {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.evo-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-align: center;
+  padding: 7px 2px;
+  border-radius: 9px;
+  border: 1px dashed rgba(201, 169, 106, 0.4);
+}
+
+.evo-node.is-done {
+  border-style: solid;
+  border-color: var(--gold-2);
+  background: rgba(243, 227, 188, 0.35);
+}
+
+.evo-node i {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-style: normal;
+  font-size: 9px;
+  color: var(--gold-3);
+  background: rgba(255, 252, 245, 0.8);
+  border: 1px solid rgba(201, 169, 106, 0.5);
+}
+
+.evo-node b {
+  font-size: 9.5px;
+  color: var(--ink-2);
+}
+
+.evo-node em {
+  font-style: normal;
+  font-size: 8.5px;
+  color: var(--ink-4);
+}
+
+.evo-btn {
+  margin-top: 2px;
+}
+
+.evo-tip {
+  margin-top: 4px;
+  text-align: center;
+  font-size: 9.5px;
+  color: var(--ink-3);
+}

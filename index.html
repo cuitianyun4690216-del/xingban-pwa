@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1A1624" />
+  <meta name="description" content="星伴学园 · 典雅奇幻宠物养成学园，和卡皮巴拉、小仓鼠一起探索世界。" />
+  <title>星伴学园 · Star Buddy Academy</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/favicon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="星伴学园" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
+
+  <link rel="preload" as="image" href="assets/backgrounds/academy-dusk.webp" />
+  <link rel="preload" as="image" href="assets/pets/capybara/idle.webp" />
+  <link rel="preload" as="image" href="assets/pets/hamster/idle.webp" />
+
+  <link rel="stylesheet" href="styles/tokens.css?v=5" />
+  <link rel="stylesheet" href="styles/base.css?v=5" />
+  <link rel="stylesheet" href="styles/components.css?v=5" />
+  <link rel="stylesheet" href="styles/home.css?v=5" />
+  <link rel="stylesheet" href="styles/pet.css?v=5" />
+  <link rel="stylesheet" href="styles/pages.css?v=5" />
+  <link rel="stylesheet" href="styles/modal.css?v=5" />
+  <link rel="stylesheet" href="styles/wardrobe.css?v=5" />
+  <link rel="stylesheet" href="styles/garden.css?v=5" />
+  <link rel="stylesheet" href="styles/extras.css?v=5" />
+  <link rel="stylesheet" href="styles/responsive.css?v=5" />
+  <link rel="stylesheet" href="styles/polish.css?v=6" />
+
+  <script src="js/vendor/vue.global.prod.js?v=5"></script>
+  <script src="js/icons.js?v=5"></script>
+  <script src="js/ornaments.js?v=5"></script>
+  <script src="js/profiles.js?v=7"></script>
+  <script src="js/assets.js?v=5"></script>
+  <script src="js/pets.js?v=5"></script>
+  <script src="js/data/catalog.js?v=5"></script>
+  <script src="js/store.js?v=5"></script>
+  <script src="js/data/wardrobe.js?v=5"></script>
+  <script src="js/data/world.js?v=5"></script>
+  <script src="js/store-world.js?v=5"></script>
+  <script src="js/store-parent.js?v=5"></script>
+  <script src="js/store-reset.js?v=7"></script>
+</head>
+<body>
+  <div id="boot-error" style="display:none;position:fixed;inset:0;z-index:99999;background:#FFFDF7;color:#2B2233;padding:18px;font:13px/1.6 -apple-system,'Microsoft YaHei',sans-serif;overflow:auto;">
+    <h2 style="font-size:16px;margin:0 0 8px;">星伴学园启动失败</h2>
+    <p style="margin:0 0 10px;color:#8A6D3B;">请把这个画面截图发给开发者。</p>
+    <pre id="boot-error-text" style="white-space:pre-wrap;word-break:break-all;background:#F4ECDC;border:1px solid #D9C79C;border-radius:8px;padding:10px;font-size:11px;margin:0 0 12px;"></pre>
+    <button onclick="location.reload()" style="padding:10px 18px;border-radius:8px;border:1px solid #D9C79C;background:#F8EAC6;font-size:14px;">重新加载</button>
+  </div>
+  <script>
+    window.__xbErr = (function () {
+      var shown = false;
+      return function (msg) {
+        var box = document.getElementById('boot-error');
+        var txt = document.getElementById('boot-error-text');
+        if (!box || !txt) return;
+        txt.textContent =
+          '构建：2026-11-05-diagnostic\n' +
+          'UA：' + navigator.userAgent + '\n' +
+          'hint：' + msg;
+        box.style.display = 'block';
+        shown = true;
+      };
+    })();
+    window.addEventListener('error', function (e) {
+      var where = (e.filename || '') + ':' + (e.lineno || '');
+      window.__xbErr((e.error && (e.error.stack || e.error.message)) || (e.message + ' @' + where));
+    });
+    window.addEventListener('unhandledrejection', function (e) {
+      var r = e.reason;
+      window.__xbErr('Promise 错误：' + ((r && (r.stack || r.message)) || r));
+    });
+    setTimeout(function () {
+      var app = document.getElementById('app');
+      if (app && app.querySelector('.boot')) {
+        window.__xbErr('页面已加载，但 Vue 没有启动（可能是旧版 WebView 不支持某些语法）。');
+      }
+    }, 5000);
+  </script>
+  <div id="app">
+    <div class="boot">
+      <div class="boot__orb"></div>
+      <p class="boot__text">星伴学园正在点亮灯火…</p>
+    </div>
+  </div>
+
+  <noscript>
+    <p style="padding:24px;font-family:sans-serif;">星伴学园需要启用 JavaScript 才能进入。</p>
+  </noscript>
+
+  <script src="js/audio.js?v=6"></script>
+  <script src="js/fx.js?v=6"></script>
+  <script src="js/components/ui.js?v=5"></script>
+  <script src="js/components/pet-actor.js?v=5"></script>
+  <script src="js/components/quest-card.js?v=5"></script>
+  <script src="js/components/study-timer.js?v=5"></script>
+  <script src="js/components/wardrobe.js?v=5"></script>
+  <script src="js/components/parent-ui.js?v=5"></script>
+  <script src="js/components/modals.js?v=5"></script>
+  <script src="js/views/home.js?v=5"></script>
+  <script src="js/views/study.js?v=5"></script>
+  <script src="js/views/pet.js?v=5"></script>
+  <script src="js/views/collection.js?v=5"></script>
+  <script src="js/views/garden.js?v=5"></script>
+  <script src="js/views/explore.js?v=5"></script>
+  <script src="js/views/diary.js?v=5"></script>
+  <script src="js/views/parent.js?v=5"></script>
+  <script src="js/app.js?v=5"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('sw.js').catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>
