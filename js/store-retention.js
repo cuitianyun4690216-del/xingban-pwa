@@ -214,6 +214,29 @@
     return days;
   }
 
+  /* ---------------- 洗澡 / 梳毛 ---------------- */
+  function finishCareGame(kind) {
+    const day = dateKey();
+    if (!s.care.gameDay || s.care.gameDay !== day) {
+      s.care.gameDay = day;
+      s.care.bathToday = 0;
+      s.care.brushToday = 0;
+    }
+    const used = kind === 'bath' ? s.care.bathToday : s.care.brushToday;
+    if (used >= 2) return { ok: false, reason: '今天已经洗/梳过两次啦，明天再来' };
+    if (kind === 'bath') {
+      s.care.bathToday += 1;
+      s.care.mood = Math.min(100, s.care.mood + 8);
+    } else {
+      s.care.brushToday += 1;
+      s.care.mood = Math.min(100, s.care.mood + 6);
+      s.care.energy = Math.min(100, s.care.energy + 4);
+    }
+    const pet = s.pets[s.activePetId];
+    if (pet) pet.intimacy = Math.min(100, pet.intimacy + 3);
+    return { ok: true, mood: s.care.mood };
+  }
+
   /* ---------------- 与任务联动 ---------------- */
   function bumpWeekly() {
     if (s.weekly.key !== weekKey()) s.weekly = { key: weekKey(), tasks: 0, goal: WEEKLY_GOAL, claimed: false };
@@ -236,6 +259,7 @@
     checkIn: checkin,
     claimWeekly: claimWeekly,
     titleRefresh: refreshTitle,
+    finishCareGame: finishCareGame,
   });
 
   Object.assign(XB.helpers, {

@@ -125,6 +125,9 @@
       encounter() {
         return XB.ui.encounter;
       },
+      petGame() {
+        return XB.ui.petGame;
+      },
       careSheet() {
         return XB.ui.careSheet;
       },
@@ -302,6 +305,7 @@
         <XBHistory v-if="historyOpen" />
         <XBOnboarding v-if="onboarding" @done="onboarding = false" />
         <XBCareSheet v-if="careSheet" />
+        <XBPetGame v-if="petGame" />
         <XBEncounter v-if="encounter" />
       </div>
     `,
@@ -334,6 +338,7 @@
     ['XBParentGate', window.XBParentGate],
     ['XBOnboarding', window.XBOnboarding],
     ['XBCareSheet', window.XBCareSheet],
+    ['XBPetGame', window.XBPetGame],
     ['XBEncounter', window.XBEncounter],
     ['XBRedeem', window.XBRedeem],
     ['XBCostumeThumb', window.XBCostumeThumb],

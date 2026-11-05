@@ -129,6 +129,9 @@
           { id: 'star', name: '星辉形态', src: this.$assets.pet(id, 'evolved'), open: evo, note: '已进化', lock: '完成进化解锁' },
         ];
       },
+      openGame(kind) {
+        XB.ui.petGame = { kind: kind };
+      },
       openCare() {
         XB.ui.careSheet = true;
       },
@@ -273,6 +276,10 @@
             <b>{{ care.energy }}</b>
           </div>
           <p class="pet-care__wish">{{ wish.done ? '今天的心愿已经满足啦' : '今天想吃：' + wish.food.name }}</p>
+          <div class="pet-care__games">
+            <button class="btn btn--sm" @click="openGame('bath')">洗澡</button>
+            <button class="btn btn--sm" @click="openGame('brush')">梳毛</button>
+          </div>
         </section>
 
         <section class="form-gallery">

@@ -1,5 +1,5 @@
-/* 星伴学园 Service Worker c2f4957f78 */
-const CACHE = 'xingban-c2f4957f78';
+/* 星伴学园 Service Worker f312f63e2f */
+const CACHE = 'xingban-f312f63e2f';
 const CORE = [
   "./",
   "./assets/avatars/player.webp",
@@ -113,6 +113,7 @@ const CORE = [
   "./js/components/onboarding.js",
   "./js/components/parent-ui.js",
   "./js/components/pet-actor.js",
+  "./js/components/pet-game.js",
   "./js/components/pet-switcher.js",
   "./js/components/placeholder-view.js",
   "./js/components/quest-card.js",
