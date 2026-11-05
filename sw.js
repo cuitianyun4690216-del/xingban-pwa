@@ -1,5 +1,5 @@
-/* 星伴学园 Service Worker 7f768c32c6 */
-const CACHE = 'xingban-7f768c32c6';
+/* 星伴学园 Service Worker 0a580382d4 */
+const CACHE = 'xingban-0a580382d4';
 const CORE = [
   "./",
   "./assets/avatars/player.webp",
@@ -122,6 +122,7 @@ const CORE = [
   "./js/components/top-bar.js",
   "./js/components/ui.js",
   "./js/components/wardrobe.js",
+  "./js/data/anchors.js",
   "./js/data/catalog.js",
   "./js/data/voice.js",
   "./js/data/wardrobe.js",
